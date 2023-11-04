@@ -1,45 +1,66 @@
 package org.example;
+import java.util.Random;
 
-public class SelectionSort {
+// Java program for implementation
+// of Selection Sort
 
-    public static void selectionSort(int[] arr) {
+// Driver Class
+class SelectionSort {
+
+    void sort(int[] arr)
+    {
         int n = arr.length;
 
-        // Iterar a través de todos los elementos del arreglo
+        // One by one move boundary of unsorted subarray
         for (int i = 0; i < n - 1; i++) {
-            // Encontrar el índice del elemento mínimo en el arreglo no ordenado
-            int minIndex = i;
+            // Find the minimum element in unsorted array
+            int min_idx = i;
             for (int j = i + 1; j < n; j++) {
-                if (arr[j] < arr[minIndex]) {
-                    minIndex = j;
-                }
+                if (arr[j] < arr[min_idx])
+                    min_idx = j;
             }
 
-            // Intercambiar el elemento mínimo encontrado con el primer elemento no ordenado
-            int temp = arr[minIndex];
-            arr[minIndex] = arr[i];
+            // Swap the found minimum element with the first
+            // element
+            int temp = arr[min_idx];
+            arr[min_idx] = arr[i];
             arr[i] = temp;
         }
     }
 
-    public static void main(String[] args) {
-        int[] arr = {64, 34, 25, 12, 22, 11, 90};
-
-        System.out.println("Arreglo original:");
-        printArray(arr);
-
-        // Aplicar Selection Sort
-        selectionSort(arr);
-
-        System.out.println("\nArreglo ordenado usando Selection Sort:");
-        printArray(arr);
-    }
-
-    // Función para imprimir un arreglo
-    public static void printArray(int[] arr) {
-        for (int i : arr) {
-            System.out.print(i + " ");
-        }
+    // Prints the array
+    void printArray(int[] arr)
+    {
+        int n = arr.length;
+        for (int i = 0; i < n; ++i)
+            System.out.print(arr[i] + " ");
         System.out.println();
     }
+
+    // main function
+    public static void main(String[] args)
+    {
+        long tiempo_inicial = System.currentTimeMillis();
+        SelectionSort ob = new SelectionSort();
+
+        // Generate a random array with a specified size
+        int size = 10; // Change this to the desired size of your array
+        int[] arr = new int[size];
+        Random random = new Random();
+
+        // Fill the array with random numbers from 1 to 100
+        for (int i = 0; i < size; i++) {
+            arr[i] = random.nextInt(100) + 1; // Generates random number from 1 to 100
+        }
+        ob.sort(arr);
+        System.out.println("Sorted array:");
+        ob.printArray(arr);
+
+        System.out.println(System.currentTimeMillis() - tiempo_inicial);
+    }
 }
+/*
+cita
+https://www.geeksforgeeks.org/java-program-for-selection-sort/
+ */
+
